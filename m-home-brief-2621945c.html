@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>开云 · 产品说明</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f6fafc;
+      color: #1f2a38;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    /* 网格卡片布局 */
+    .grid-2, .grid-3 {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .grid-2 {
+      grid-template-columns: 1fr;
+    }
+
+    .grid-3 {
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 600px) {
+      .grid-2 {
+        grid-template-columns: 1fr 1fr;
+      }
+      .grid-3 {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (min-width: 840px) {
+      .grid-3 {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+
+    /* 卡片通用 */
+    .card {
+      background: #ffffff;
+      border-radius: 1.25rem;
+      padding: 1.75rem 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 40, 30, 0.04), 0 2px 4px rgba(0, 60, 50, 0.02);
+      transition: box-shadow 0.2s ease, transform 0.15s ease;
+      border: 1px solid #e4f0ed;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 20px rgba(0, 80, 60, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: #0b4f44;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card-title .icon {
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #2c3a47;
+    }
+
+    /* hero区 */
+    .hero {
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+      color: #09493f;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero .sub {
+      font-size: 1.05rem;
+      color: #2a5b52;
+      max-width: 640px;
+      margin: 0 auto 1.2rem;
+      background: rgba(6, 94, 77, 0.04);
+      padding: 0.6rem 1.2rem;
+      border-radius: 40px;
+      display: inline-block;
+      border: 1px solid #b6d4cd;
+      backdrop-filter: blur(2px);
+    }
+
+    .hero .desc {
+      font-size: 1rem;
+      color: #2d4a43;
+      max-width: 720px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* 摘要区 */
+    .summary-card {
+      background: #dff0ec;
+      border: 1px solid #b3d4cb;
+      border-radius: 1.5rem;
+      padding: 2rem 2rem 2rem 2.5rem;
+      margin-bottom: 2.8rem;
+      position: relative;
+    }
+
+    .summary-card::before {
+      content: "📌";
+      position: absolute;
+      left: 0.8rem;
+      top: 1.2rem;
+      font-size: 1.5rem;
+    }
+
+    .summary-card p {
+      font-size: 1rem;
+      color: #0f3f36;
+      font-weight: 450;
+    }
+
+    .summary-card strong {
+      color: #00463a;
+    }
+
+    /* 使用建议 / 提示区块 */
+    .tip-block {
+      background: #ffffff;
+      border-left: 6px solid #1d8471;
+      padding: 1.2rem 1.5rem;
+      border-radius: 0.8rem;
+      margin: 2.2rem 0;
+      box-shadow: 0 2px 6px rgba(0, 56, 45, 0.04);
+    }
+
+    .tip-block h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #085a4b;
+      margin-bottom: 0.5rem;
+    }
+
+    .tip-block ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .tip-block li {
+      margin-bottom: 0.5rem;
+      padding-left: 1.6rem;
+      position: relative;
+      color: #1f3e38;
+    }
+
+    .tip-block li::before {
+      content: "•";
+      color: #1d8471;
+      font-weight: bold;
+      position: absolute;
+      left: 0.3rem;
+    }
+
+    /* faq 精简 */
+    .faq-grid {
+      display: grid;
+      gap: 1.2rem;
+      margin: 2rem 0;
+    }
+
+    .faq-item {
+      background: #f1f9f6;
+      padding: 1.2rem 1.5rem;
+      border-radius: 1rem;
+      border: 1px solid #c7dfd7;
+    }
+
+    .faq-item .q {
+      font-weight: 600;
+      color: #004e40;
+      margin-bottom: 0.25rem;
+    }
+
+    .faq-item .a {
+      font-size: 0.95rem;
+      color: #24453d;
+    }
+
+    /* 链接与按钮 */
+    a {
+      color: #136f5e;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s;
+    }
+
+    a:hover {
+      border-bottom: 1px solid #136f5e;
+    }
+
+    .inline-link {
+      white-space: nowrap;
+    }
+
+    .footer-note {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #c9dfd7;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #42635a;
+    }
+
+    /* 响应式微调 */
+    @media (max-width: 480px) {
+      body {
+        padding: 1.5rem 0.8rem;
+      }
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      .hero .sub {
+        font-size: 0.95rem;
+      }
+      .card {
+        padding: 1.4rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HERO -->
+  <header class="hero">
+    <h1>开云 · 产品说明</h1>
+    <div class="sub">面向信息服务的轻量化聚合</div>
+    <p class="desc">
+      如果你正在寻找一个结构清晰、功能指向明确的服务页面，<a href="https://m-home-ky.com" class="inline-link">开云</a>
+      提供了一种直觉式的信息展示方式。以下从用途、特点、适用场景与使用建议几个角度，帮助你快速了解。
+    </p>
+  </header>
+
+  <!-- 摘要卡片 -->
+  <div class="summary-card">
+    <p>
+      <strong>开云</strong> 是一个以内容组织及轻交互为主的说明型页面，并非电商或复杂应用平台。
+      它的主要价值在于让访问者一目了然地理解网站核心用途，并快速定位自己需要的模块或信息。
+      当前页面本身即为其设计风格的演示 —— 清晰、克制、有呼吸感。
+    </p>
+  </div>
+
+  <!-- 亮点卡片网格 grid-2 -->
+  <section style="margin-bottom: 2.2rem;">
+    <h2 style="font-size: 1.4rem; font-weight: 600; color: #09473e; margin-bottom: 1rem;">亮点与特点</h2>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title"><span class="icon">📐</span> 信息优先的布局</div>
+        <p>内容按主次分成区块，标题、摘要、特点、使用引导各自独立。用户无需滚动多次即可建立对页面的整体认知。</p>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="icon">🎨</span> 蓝绿系视觉氛围</div>
+        <p>主色调取自深青与浅湖绿，配合留白与圆角卡片，营造出干净、稳定的浏览感受。字号与间距针对移动端特别调整。</p>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="icon">🧩</span> 模块化结构</div>
+        <p>页面由独立的卡片与区块构成，便于后期增删内容或调整顺序。每个模块都承担具体的说明功能，不堆砌装饰。</p>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="icon">⚖️</span> 克制的引导</div>
+        <p>所有链接与交互元素均以提供信息为目的，不包含激进或夸大措辞。用户可以自主决定下一步操作。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 使用建议 + 场景混合 -->
+  <div class="tip-block">
+    <h3>💡 使用建议与典型场景</h3>
+    <ul>
+      <li><strong>快速判断用途：</strong> 如果你被分享了一个链接，想了解网站主要提供什么，<a href="https://m-home-ky.com" class="inline-link">开云</a> 的首页设计能让你在 5 秒内建立预期。</li>
+      <li><strong>信息对比或索引：</strong> 当页面包含多个条目或板块时，卡片式网格适合并列对比，例如功能差异、分类目录。</li>
+      <li><strong>移动端优先浏览：</strong> 页面布局在手机与平板上自动适配为单列或双列，保证阅读连贯性。</li>
+      <li><strong>内容更新频率不高：</strong> 这类说明型页面适合作为静态介绍，如果内容频繁变动，可考虑配合简单后端或数据文件维护。</li>
+    </ul>
+  </div>
+
+  <!-- FAQ 摘要 grid-3 -->
+  <section>
+    <h2 style="font-size: 1.4rem; font-weight: 600; color: #09473e; margin-bottom: 1rem;">常见疑问概要</h2>
+    <div class="grid-3 faq-grid">
+      <div class="faq-item">
+        <div class="q">这个页面主要解决什么问题？</div>
+        <div class="a">帮助用户快速理解网站定位与内容范围，减少猜测成本。适合作为项目介绍、工具说明或轻量产品首页。</div>
+      </div>
+      <div class="faq-item">
+        <div class="q">是否需要注册或下载？</div>
+        <div class="a">不需要。当前页面为纯信息展示，不涉及账户系统或客户端。所有内容均基于标准网页技术。</div>
+      </div>
+      <div class="faq-item">
+        <div class="q">可以自己修改或复用设计吗？</div>
+        <div class="a">页面结构与样式基于通用 CSS，你可以参考其配色与卡片系统进行二次调整。注意替换内部链接与示例文本。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 可信但克制的访问说明 -->
+  <div style="margin: 2.8rem 0 1.5rem; background: #e8f3ef; border-radius: 1.5rem; padding: 1.8rem 2rem;">
+    <h3 style="font-size: 1.2rem; font-weight: 600; color: #00463a; margin-bottom: 0.8rem;">🔍 访问说明</h3>
+    <p style="margin-bottom: 0.5rem; color: #1b423a;">
+      <a href="https://m-home-ky.com" class="inline-link">开云</a> 页面以信息传达为主要目的，未嵌入第三方跟踪脚本或弹窗式广告。
+      所有链接均指向自身域名下的资源，不包含外部重定向。页面采用静态 HTML，加载速度快，不依赖 JavaScript 运行。
+    </p>
+    <p style="color: #1b423a;">
+      如果你对页面的内容组织方式或配色感兴趣，可以直接查看网页源代码作为参考。不提供夸大效果的承诺，也不收集访问者的个人数据。
+    </p>
+  </div>
+
+  <!-- 页脚 -->
+  <div class="footer-note">
+    <p>产品说明页 · 基于静态 HTML 构建 · 配色蓝绿系 · 内容仅供参考</p>
+  </div>
+
+</div>
+
+</body>
+</html>
