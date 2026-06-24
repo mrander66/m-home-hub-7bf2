@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>爱游戏 · 信息索引与资料整理</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(145deg, #fde9d8 0%, #f9d6b8 40%, #f0c2a0 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1.5rem 3rem;
+    }
+
+    .page {
+      max-width: 1180px;
+      width: 100%;
+    }
+
+    /* 卡片通用 */
+    .card {
+      background: #fffffffa;
+      backdrop-filter: blur(2px);
+      border-radius: 28px;
+      padding: 2.2rem 2.5rem;
+      box-shadow: 0 12px 30px rgba(150, 80, 30, 0.08), 0 2px 8px rgba(0,0,0,0.03);
+      transition: box-shadow 0.2s ease;
+      margin-bottom: 2rem;
+    }
+
+    .card:hover {
+      box-shadow: 0 18px 40px rgba(160, 90, 40, 0.10);
+    }
+
+    /* hero 专属 */
+    .hero {
+      background: linear-gradient(135deg, #fef7f0, #fff6ec);
+      border-radius: 32px;
+      padding: 3.5rem 3rem;
+      margin-bottom: 2.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+      box-shadow: 0 16px 36px rgba(180, 100, 50, 0.08);
+    }
+
+    .hero-text {
+      flex: 1 1 280px;
+    }
+
+    .hero-text h1 {
+      font-size: 2.8rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #5e2e1a;
+      line-height: 1.2;
+      margin-bottom: 0.7rem;
+    }
+
+    .hero-text h1 span {
+      background: linear-gradient(140deg, #b45f35, #9d4e2a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-text .sub {
+      font-size: 1.1rem;
+      color: #7f4d32;
+      max-width: 500px;
+      line-height: 1.6;
+      opacity: 0.85;
+    }
+
+    .hero-tag {
+      background: #e7d2be;
+      color: #3f2315;
+      padding: 0.4rem 1.2rem;
+      border-radius: 60px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: inline-block;
+      margin-top: 1rem;
+    }
+
+    /* 区域标题 */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .section-label h2 {
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: #4b2c1a;
+      letter-spacing: -0.01em;
+    }
+
+    .section-label .badge {
+      background: #d9b69b;
+      color: #2d1a0e;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    /* 优势网格 */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 1.5rem 0 0.2rem;
+    }
+
+    .feature-item {
+      background: #faf3eb;
+      border-radius: 24px;
+      padding: 1.6rem 1.2rem;
+      transition: background 0.2s, transform 0.1s;
+      border: 1px solid #ecdccc;
+    }
+
+    .feature-item:hover {
+      background: #f6e9dd;
+      transform: translateY(-2px);
+    }
+
+    .feature-item .emoji-bg {
+      font-size: 1.8rem;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    .feature-item h3 {
+      font-size: 1.2rem;
+      color: #472b19;
+      margin-bottom: 0.3rem;
+    }
+
+    .feature-item p {
+      font-size: 0.93rem;
+      color: #634b38;
+      line-height: 1.5;
+    }
+
+    /* 说明区——信息密度稍高 */
+    .desc-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .desc-main {
+      flex: 2 1 300px;
+    }
+
+    .desc-main p {
+      color: #3f2c1d;
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+
+    .desc-main p strong {
+      color: #9a4f2a;
+      font-weight: 600;
+    }
+
+    .desc-side {
+      flex: 1 1 180px;
+      background: #f2e4d7;
+      border-radius: 20px;
+      padding: 1.6rem 1.4rem;
+    }
+
+    .desc-side ul {
+      list-style: none;
+    }
+
+    .desc-side li {
+      margin-bottom: 0.8rem;
+      font-size: 0.92rem;
+      color: #3b2618;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .desc-side li::before {
+      content: "·";
+      position: absolute;
+      left: 0;
+      color: #b76b40;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    /* FAQ 摘要 */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .faq-item {
+      background: #fcf7f2;
+      border-radius: 18px;
+      padding: 0.9rem 1.6rem;
+      border-left: 5px solid #d6a784;
+    }
+
+    .faq-item .q {
+      font-weight: 600;
+      color: #3b2316;
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .faq-item .a {
+      color: #5f4432;
+      font-size: 0.93rem;
+      line-height: 1.5;
+    }
+
+    .faq-summary-link {
+      margin-top: 0.8rem;
+      text-align: right;
+      font-size: 0.95rem;
+    }
+
+    .faq-summary-link a {
+      color: #8b512f;
+      text-decoration: none;
+      border-bottom: 1px dotted #b87c58;
+      padding-bottom: 1px;
+    }
+
+    /* 底部链接 */
+    .footer-links {
+      margin-top: 2rem;
+      padding: 1.5rem 0 0.5rem;
+      border-top: 1px solid #d9bcab;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem 2rem;
+    }
+
+    .footer-links .copyright {
+      font-size: 0.85rem;
+      color: #624b38;
+    }
+
+    .footer-links .nav a {
+      color: #5d3822;
+      text-decoration: none;
+      font-weight: 500;
+      margin-left: 1.2rem;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s;
+    }
+
+    .footer-links .nav a:hover {
+      border-bottom-color: #a86f47;
+    }
+
+    .footer-links .main-link {
+      font-size: 1.1rem;
+    }
+
+    .btn-like-link {
+      display: inline-block;
+      background: #dbb69c;
+      color: #2c1b10;
+      padding: 0.5rem 1.8rem;
+      border-radius: 60px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+      border: none;
+      box-shadow: 0 2px 6px rgba(120, 60, 20, 0.08);
+    }
+
+    .btn-like-link:hover {
+      background: #caa386;
+      transform: scale(1.01);
+    }
+
+    /* 响应式 */
+    @media (max-width: 680px) {
+      body {
+        padding: 1.2rem 1rem;
+      }
+      .hero {
+        padding: 2rem 1.5rem;
+      }
+      .hero-text h1 {
+        font-size: 2.2rem;
+      }
+      .card {
+        padding: 1.6rem 1.3rem;
+      }
+      .desc-side {
+        margin-top: 0.5rem;
+      }
+      .footer-links {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .footer-links .nav a {
+        margin-left: 0;
+        margin-right: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- Hero 区 -->
+    <div class="hero">
+      <div class="hero-text">
+        <h1>资料 · <span>索引</span> 与整理</h1>
+        <p class="sub">以结构化方式梳理游戏行业信息流，为深度浏览者提供可回溯的内容节点。</p>
+        <span class="hero-tag">信息密度 · 克制叙述</span>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="https://newsonline-igame.com" class="btn-like-link" style="font-weight:600;">爱游戏</a>
+      </div>
+    </div>
+
+    <!-- 优势区 卡片 -->
+    <div class="card">
+      <div class="section-label">
+        <h2>索引优势</h2>
+        <span class="badge">结构化</span>
+      </div>
+      <div class="grid-3">
+        <div class="feature-item">
+          <span class="emoji-bg">📂</span>
+          <h3>分类聚合</h3>
+          <p>按题材、机制、发布时间归类，减少信息噪声，提升检索效率。</p>
+        </div>
+        <div class="feature-item">
+          <span class="emoji-bg">🔗</span>
+          <h3>交叉引用</h3>
+          <p>条目之间设关联锚点，便于延展阅读，保持上下文连续。</p>
+        </div>
+        <div class="feature-item">
+          <span class="emoji-bg">🧩</span>
+          <h3>轻量化呈现</h3>
+          <p>不堆砌冗余描述，每项资料均提炼核心要素与来源节点。</p>
+        </div>
+      </div>
+      <p style="margin-top:1.4rem; color:#5a3d2b; font-size:0.95rem; border-left: 3px solid #d6a784; padding-left:1rem;">
+        索引范围覆盖独立项目、系列作品及行业动态，持续修订维护。
+      </p>
+    </div>
+
+    <!-- 说明区 卡片 -->
+    <div class="card">
+      <div class="section-label">
+        <h2>说明 · 信息组织方式</h2>
+        <span class="badge">方法</span>
+      </div>
+      <div class="desc-content">
+        <div class="desc-main">
+          <p>本索引以 <strong>主题词 + 时间线</strong> 为框架，每一条目均标注原始出处或整理依据。内容来源于可查证的公开资料，不做主观演绎，不渲染情绪。整理者仅做筛选、分类与摘要，保留原文关键信息。</p>
+          <p>索引库目前覆盖策略、角色扮演、模拟经营等品类，每个条目附带简短注释与可延伸阅读的关联词。对于已停止更新或版本变动较大的项目，会标注参考时效，方便使用者自行判断。</p>
+          <p>索引本身并非评测或推荐，而是提供一个相对中立的信息起点。使用者可根据自身需求进一步验证原始材料。在<a href="https://newsonline-igame.com" style="color:#9b5430; text-decoration:underline; font-weight:500;">爱游戏</a>的索引页中，你可以找到按字母与主题排列的完整词表。</p>
+        </div>
+        <div class="desc-side">
+          <ul>
+            <li>每个词条均附来源标记</li>
+            <li>定期合并重复条目</li>
+            <li>保留版本变更记录</li>
+            <li>开放修正反馈通道</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ 摘要 卡片 -->
+    <div class="card">
+      <div class="section-label">
+        <h2>常见索引疑问</h2>
+        <span class="badge">FAQ 摘要</span>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="q">索引收录标准是什么？</div>
+          <div class="a">优先收录具有公开资料支撑、且有一定讨论积累的作品或事件。不收录未发布、仅限传闻的内容。</div>
+        </div>
+        <div class="faq-item">
+          <div class="q">如何快速定位特定条目？</div>
+          <div class="a">可使用页面内搜索功能，或按分类标签筛选。每个条目均配有别名与相关词跳转。</div>
+        </div>
+        <div class="faq-item">
+          <div class="q">信息多久更新一次？</div>
+          <div class="a">主要条目每季度审查一次；时效性较强的内容视情况月更。每次更新会在变更日志中标注。</div>
+        </div>
+      </div>
+      <div class="faq-summary-link">
+        <a href="https://newsonline-igame.com">爱游戏</a>
+      </div>
+    </div>
+
+    <!-- 底部链接 -->
+    <div class="footer-links">
+      <div class="copyright">
+        © 信息索引 · 资料整理
+      </div>
+      <div class="nav">
+        <a href="https://newsonline-igame.com" style="font-weight: 600; margin-left:0;">爱游戏</a>
+        <a href="#">索引结构</a>
+        <a href="#">更新日志</a>
+        <a href="#">联系整理</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
