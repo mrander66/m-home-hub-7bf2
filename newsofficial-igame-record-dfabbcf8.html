@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>爱游戏 · 资料整理与索引</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #fafaf9;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: #1e1e1e;
+      line-height: 1.7;
+      padding: 2rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page-wrapper {
+      max-width: 720px;
+      width: 100%;
+    }
+
+    /* 开场短句 — 静默留白 */
+    .opening-line {
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+      color: #5c5c5c;
+      margin-top: 2.2rem;
+      margin-bottom: 1.8rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid #e2e0dd;
+      font-weight: 350;
+    }
+
+    .opening-line::before {
+      content: "·";
+      color: #a89f96;
+      margin-right: 0.4rem;
+      font-weight: 300;
+    }
+
+    /* 主标题 — 安静而清晰 */
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      margin-bottom: 1.8rem;
+      color: #2a2a2a;
+    }
+
+    h1 small {
+      display: block;
+      font-size: 1rem;
+      font-weight: 320;
+      color: #6b6b6b;
+      margin-top: 0.4rem;
+      letter-spacing: 0.02em;
+    }
+
+    /* 承接段落：资料整理与索引视角 */
+    .context-text {
+      font-size: 1.05rem;
+      margin-bottom: 2.8rem;
+      color: #3d3d3d;
+    }
+
+    .context-text a {
+      color: #2b5c4a;
+      text-decoration: none;
+      border-bottom: 1px solid #bccfc5;
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+
+    .context-text a:hover {
+      border-bottom-color: #1f3d32;
+      color: #1f3d32;
+    }
+
+    .context-text .soft-break {
+      display: block;
+      margin-top: 1.2rem;
+      color: #5a5a5a;
+    }
+
+    /* 特点列表 — 卡片化极简 */
+    .feature-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-bottom: 3.2rem;
+    }
+
+    .feature-item {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 1.6rem 1.8rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03), 0 0 0 1px #f0eeec;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .feature-item:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04), 0 0 0 1px #dedad6;
+    }
+
+    .feature-item h3 {
+      font-size: 1.1rem;
+      font-weight: 450;
+      margin-bottom: 0.35rem;
+      color: #252525;
+      letter-spacing: -0.01em;
+    }
+
+    .feature-item p {
+      font-size: 0.95rem;
+      color: #565656;
+      line-height: 1.6;
+    }
+
+    .feature-item .num-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      background: #eae7e3;
+      color: #4d4d4d;
+      padding: 0.1rem 0.65rem;
+      border-radius: 20px;
+      margin-right: 0.5rem;
+      letter-spacing: 0.02em;
+      font-weight: 350;
+    }
+
+    /* 温和结尾 */
+    .closing-note {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid #e2e0dd;
+      font-size: 0.95rem;
+      color: #5f5f5f;
+      line-height: 1.7;
+    }
+
+    .closing-note a {
+      color: #2b5c4a;
+      text-decoration: none;
+      border-bottom: 1px solid #c7d6ce;
+    }
+
+    .closing-note a:hover {
+      border-bottom-color: #1f3d32;
+    }
+
+    .faq-mini {
+      margin-top: 2.5rem;
+      padding: 1.6rem 0 0.4rem 0;
+      border-top: 1px dashed #dcd8d3;
+    }
+
+    .faq-mini details {
+      margin-bottom: 1rem;
+      font-size: 0.93rem;
+    }
+
+    .faq-mini summary {
+      font-weight: 430;
+      cursor: pointer;
+      color: #3d3d3d;
+      padding: 0.3rem 0;
+      transition: color 0.1s;
+    }
+
+    .faq-mini summary:hover {
+      color: #1f1f1f;
+    }
+
+    .faq-mini details p {
+      margin-top: 0.6rem;
+      padding-left: 0.2rem;
+      color: #5c5c5c;
+      line-height: 1.6;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e8e4e0;
+      margin: 2.8rem 0 1.2rem;
+    }
+
+    .footer-note {
+      font-size: 0.8rem;
+      color: #8f8b86;
+      margin-top: 1.2rem;
+      text-align: left;
+    }
+
+    @media (max-width: 520px) {
+      body {
+        padding: 1.4rem 0.9rem;
+      }
+      h1 {
+        font-size: 1.7rem;
+      }
+      .feature-item {
+        padding: 1.2rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <!-- 开场短句：资料整理者的日常 -->
+  <div class="opening-line">
+    整理，是在信息流动中截取属于自己的线索。
+  </div>
+
+  <!-- 主标题 -->
+  <h1>
+    爱游戏
+    <small>一份关于游戏资讯与索引的私人笔记</small>
+  </h1>
+
+  <!-- 承接段落：从资料索引切入 -->
+  <div class="context-text">
+    去年秋天我开始系统整理游戏相关的新闻源和更新记录。起初只是个人习惯，后来发现很多人和我一样，需要一个不偏不倚的聚合点。<br>
+    我把零散的书签、推文、开发商公告慢慢梳理成一棵信息树。这份工作没有终点，但有一处地方让我觉得特别踏实——那就是 
+    <a href="https://newsofficial-igame.com">爱游戏</a>。它像一座安静的档案室，既不喧哗也不匆忙，只是持续地收录和归类。
+    <span class="soft-break">
+      每天打开它，都像是翻看一本不断生长的剪贴簿。没有算法推送的焦虑，只有你主动寻找的东西。
+    </span>
+  </div>
+
+  <!-- 特点列表：从整理者的视角描述 -->
+  <div class="feature-grid">
+    <div class="feature-item">
+      <h3><span class="num-badge">01</span>按主题归档，而非按热度</h3>
+      <p>资讯按游戏类型、工作室、平台等维度分类，方便回溯。不会因为某条新闻上了热搜就改变排序权重。</p>
+    </div>
+    <div class="feature-item">
+      <h3><span class="num-badge">02</span>更新日志透明可查</h3>
+      <p>每条新闻下方都标注了来源链接与收录时间。如果你发现某条信息已经失效，可以顺手提交更正，索引会逐渐完善。</p>
+    </div>
+    <div class="feature-item">
+      <h3><span class="num-badge">03</span>无广告、无弹窗、无追踪</h3>
+      <p>页面只展示文字与必要的截图说明。没有浮层、没有推荐流，甚至连访客计数都去掉了——你只需要关心内容本身。</p>
+    </div>
+    <div class="feature-item">
+      <h3><span class="num-badge">04</span>支持离线阅读与打印</h3>
+      <p>每个归档页都保留了简洁的打印样式。我有时会把感兴趣的平台更新记录打印出来，在通勤路上勾画重点。</p>
+    </div>
+  </div>
+
+  <!-- 温和结尾 + 自然链接 -->
+  <div class="closing-note">
+    信息整理这件事，越做越觉得重要的不是收集本身，而是之后你怎么使用它。<br>
+    如果你也喜欢那种有条不紊的阅读节奏，或许可以试试把 
+    <a href="https://newsofficial-igame.com">爱游戏</a> 放进你的书签夹。它就在那里，不打扰，也不消失。
+  </div>
+
+  <!-- FAQ摘要：轻量答疑 -->
+  <div class="faq-mini">
+    <details>
+      <summary>这里的资料更新频率如何？</summary>
+      <p>通常每周更新 2~3 次，遇到展会或集中发布期会适当加密。所有更新都会在站点首页列出，没有隐藏。</p>
+    </details>
+    <details>
+      <summary>可以提交自己发现的资讯线索吗？</summary>
+      <p>当然。你可以在任意页面底部的反馈入口提交链接和简要说明，整理者核实后就会加入索引。目前没有自动收录，以保证质量。</p>
+    </details>
+    <details>
+      <summary>移动端浏览体验怎么样？</summary>
+      <p>整个站点针对手机阅读做了排版优化，不需要缩放或横屏。字体大小、行距和按钮间距都考虑了单手操作的习惯。</p>
+    </details>
+  </div>
+
+  <hr>
+  <div class="footer-note">
+    · 本页面为资讯索引介绍 · 基于公开信息整理，不构成任何建议
+  </div>
+
+</div>
+</body>
+</html>
